@@ -464,7 +464,7 @@
   /***/
   function _(module, exports, __webpack_require__) {
     module.exports = __webpack_require__(
-    /*! C:\worktests\holidays\ui\src\styles.css */
+    /*! /home/maskim/projects/testasks/holidays/ui/src/styles.css */
     "./src/styles.css");
     /***/
   }

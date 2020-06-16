@@ -351,7 +351,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
   /***/
   function _(module, exports, __webpack_require__) {
     module.exports = __webpack_require__(
-    /*! C:\worktests\holidays\ui\src\main.ts */
+    /*! /home/maskim/projects/testasks/holidays/ui/src/main.ts */
     "./src/main.ts");
     /***/
   }
