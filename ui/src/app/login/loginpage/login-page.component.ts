@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {AuthService} from "../../shared/services/auth.service";
 import {TokenStorageService} from "../../shared/services/token-storage.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-loginpage',
@@ -25,7 +26,8 @@ export class LoginPageComponent implements OnInit {
 
   constructor(private authService: AuthService,
               private tokenStorage: TokenStorageService,
-              private fb: FormBuilder) {
+              private fb: FormBuilder,
+              private router: Router) {
   }
 
   ngOnInit() {
@@ -63,7 +65,6 @@ export class LoginPageComponent implements OnInit {
   }
 
   reloadPage() {
-    window.location.reload();
-
+    this.router.navigate(['']);
   }
 }
