@@ -1,9 +1,6 @@
 package org.drive.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.sql.Date;
 import java.util.Objects;
 
@@ -26,9 +23,12 @@ public class Employee {
 
     private Date start;
 
+    @Column(unique = true)
     private String login;
 
     private String password;
+
+    private String rights;
 
     public long getId() {
         return id;
@@ -100,6 +100,14 @@ public class Employee {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getRights() {
+        return rights;
+    }
+
+    public void setRights(String rights) {
+        this.rights = rights;
     }
 
     @Override

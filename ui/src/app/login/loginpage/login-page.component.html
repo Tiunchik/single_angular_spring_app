@@ -1,0 +1,41 @@
+<div class="container-fluid">
+  <div class="row">
+    <form [formGroup]="form">
+      <div class="col">
+        <div class="form-group">
+          <label for="login">Login:</label>
+          <input type="text"
+                 formControlName="login"
+                 class="form-control" id="login">
+          <div *ngFor="let error of validationErrors.login">
+                            <span *ngIf="form.get('login').hasError(error.type)
+                                        && (form.get('login').dirty
+                                        || form.get('login').touched)"
+                                  class="validation">{{ error.message }}</span>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="form-group">
+          <label for="password">Password:</label>
+          <input type="password"
+                 formControlName="login"
+                 class="form-control" id="password">
+          <div *ngFor="let error of validationErrors.login">
+                            <span *ngIf="form.get('password').hasError(error.type)
+                                        && (form.get('password').dirty
+                                        || form.get('password').touched)"
+                                  class="validation">{{ error.message }}</span>
+          </div>
+        </div>
+      </div>
+
+
+      <button class="btn btn-info"
+              (click)="onSubmit()"
+              [disabled]="form.invalid"
+      >Sign in
+      </button>
+    </form>
+  </div>
+</div>
