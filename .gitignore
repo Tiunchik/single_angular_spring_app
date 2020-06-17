@@ -46,3 +46,8 @@ testem.log
 Thumbs.db
 /ui/target/
 /server/target/
+
+# *.iml files
+ui.iml
+server.iml
+holidays.iml
