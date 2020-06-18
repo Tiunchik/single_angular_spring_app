@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import {Employee} from "../../shared/models/employee";
+import {AuthService} from "../../shared/services/auth.service";
+import {TokenStorageService} from "../../shared/services/token-storage.service";
 
 @Component({
   selector: 'app-main',
@@ -7,7 +10,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MainComponent implements OnInit {
 
-  constructor() { }
+  user: Employee;
+
+  constructor(private token: TokenStorageService) { }
+
+
 
   ngOnInit(): void {
   }

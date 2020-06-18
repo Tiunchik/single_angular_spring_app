@@ -3,6 +3,7 @@ import {AuthService} from "../../shared/services/auth.service";
 import {TokenStorageService} from "../../shared/services/token-storage.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import { Router } from '@angular/router';
+import {Employee} from "../../shared/models/employee";
 
 @Component({
   selector: 'app-loginpage',
@@ -19,10 +20,8 @@ export class LoginPageComponent implements OnInit {
     ]
   };
   form: FormGroup;
-  isLoggedIn = false;
-  isLoginFailed = false;
+  emp: Employee = new Employee();
   errorMessage = '';
-  rights: string ='';
 
   constructor(private authService: AuthService,
               private tokenStorage: TokenStorageService,
@@ -33,8 +32,8 @@ export class LoginPageComponent implements OnInit {
   ngOnInit() {
     this.initForm();
     if (this.tokenStorage.getToken()) {
-      this.isLoggedIn = true;
-      this.rights = this.tokenStorage.getRights();
+      console.log('token is');
+      this.reloadPage();
     }
   }
 
@@ -46,20 +45,19 @@ export class LoginPageComponent implements OnInit {
   }
 
   onSubmit() {
-    this.authService.login(this.form).subscribe(
+    this.emp.login = this.form.get("login").value;
+    console.log(this.emp.login);
+    this.emp.password = this.form.get("password").value;
+    console.log(this.emp.password);
+    this.authService.login(this.emp).subscribe(
       data => {
         this.tokenStorage.saveToken(data.token);
-        this.tokenStorage.saveUser(data.login);
+        this.tokenStorage.saveUser(data.user);
         this.tokenStorage.saveRights(data.rights);
-
-        this.isLoginFailed = false;
-        this.isLoggedIn = true;
-        this.rights = this.tokenStorage.getRights();
         this.reloadPage();
       },
       err => {
         this.errorMessage = err.error.message;
-        this.isLoginFailed = true;
       }
     );
   }

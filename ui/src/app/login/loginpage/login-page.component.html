@@ -22,7 +22,7 @@
           <div class="form-group">
             <label for="password">Password:</label>
             <input type="password"
-                   formControlName="login"
+                   formControlName="password"
                    class="form-control" id="password">
             <div *ngFor="let error of validationErrors.login">
                             <span *ngIf="form.get('password').hasError(error.type)
@@ -34,7 +34,6 @@
         </div>
         <button class="btn btn-primary"
                 (click)="onSubmit()"
-
         >Sign in
         </button>
       </form>

@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable} from "rxjs";
-
-const AUTH_API = 'http://localhost:8080/login/';
+import {Employee} from "../models/employee";
+import {DBConstat} from "../constants/dbconstat";
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -13,14 +13,17 @@ const httpOptions = {
 })
 export class AuthService {
 
+  private url = DBConstat.dbURL;
+
   constructor(private http: HttpClient) {
   }
 
-  login(credentials): Observable<any> {
-    let param = new HttpParams();
-    param = param.append('login', credentials.login);
-    param = param.append('password', credentials.password);
-    return this.http.post(AUTH_API, param, httpOptions);
+  login(emp: Employee): Observable<any> {
+    const url = this.url + 'login/';
+    console.log(url);
+    return this.http.post(url,
+      JSON.stringify({'login': emp.login, 'password': emp.password}),
+      httpOptions);
   }
 
 }

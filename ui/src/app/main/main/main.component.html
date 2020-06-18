@@ -1,7 +1,13 @@
-<div class="wrapper">
-    <app-nav-bar></app-nav-bar>
-  <div id="content">
+<div class="container-fluid">
+<div class="content">
+    <div class="header">
+      <app-nav-bar></app-nav-bar>
+    </div>
+    <div class="main">
       <router-outlet></router-outlet>
+    </div>
   </div>
-  <app-footer></app-footer>
+  <footer role="contentinfo" class="footer pt-3 pb-3">
+    <app-footer></app-footer>
+  </footer>
 </div>
