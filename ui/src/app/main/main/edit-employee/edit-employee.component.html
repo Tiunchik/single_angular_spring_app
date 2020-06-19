@@ -1,0 +1,122 @@
+<div class="container">
+  <form [formGroup]="form">
+    <div class="form-group">
+      <label for="name">Name:</label>
+      <input type="text"
+             formControlName="name"
+             class="form-control" id="name">
+      <div *ngFor="let error of validationErrors.name">
+                            <span *ngIf="form.get('name').hasError(error.type)
+                                        && (form.get('name').dirty
+                                        || form.get('name').touched)"
+                                  class="validation">{{ error.message }}</span>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="patronim">Patronymic:</label>
+      <input type="text"
+             formControlName="patronim"
+             class="form-control" id="patronim">
+      <div *ngFor="let error of validationErrors.patronim">
+                            <span *ngIf="form.get('name').hasError(error.type)
+                                        && (form.get('name').dirty
+                                        || form.get('name').touched)"
+                                  class="validation">{{ error.message }}</span>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="surname">Surname:</label>
+      <input type="text"
+             formControlName="surname"
+             class="form-control" id="surname">
+      <div *ngFor="let error of validationErrors.surname">
+                            <span *ngIf="form.get('surname').hasError(error.type)
+                                        && (form.get('surname').dirty
+                                        || form.get('surname').touched)"
+                                  class="validation">{{ error.message }}</span>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="born">DOB:</label>
+      <input type="date"
+             formControlName="born"
+             class="form-control" id="born">
+      <div *ngFor="let error of validationErrors.born">
+                            <span *ngIf="form.get('born').hasError(error.type)
+                                        && (form.get('born').dirty
+                                        || form.get('born').touched)"
+                                  class="validation">{{ error.message }}</span>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="post">Position:</label>
+      <input type="text"
+             formControlName="post"
+             class="form-control" id="post">
+      <div *ngFor="let error of validationErrors.post">
+                            <span *ngIf="form.get('post').hasError(error.type)
+                                        && (form.get('post').dirty
+                                        || form.get('post').touched)"
+                                  class="validation">{{ error.message }}</span>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="start">DOS:</label>
+      <input type="date"
+             formControlName="start"
+             class="form-control" id="start">
+      <div *ngFor="let error of validationErrors.start">
+                            <span *ngIf="form.get('start').hasError(error.type)
+                                        && (form.get('start').dirty
+                                        || form.get('start').touched)"
+                                  class="validation">{{ error.message }}</span>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="login">Login:</label>
+      <input type="text"
+             formControlName="login"
+             class="form-control" id="login" autocomplete="new-login">
+      <div *ngFor="let error of validationErrors.login">
+                            <span *ngIf="form.get('login').hasError(error.type)
+                                        && (form.get('login').dirty
+                                        || form.get('login').touched)"
+                                  class="validation">{{ error.message }}</span>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="password">Password:</label>
+      <input type="password"
+             formControlName="password"
+             class="form-control" id="password" autocomplete="new-password">
+      <div *ngFor="let error of validationErrors.password">
+                            <span *ngIf="form.get('password').hasError(error.type)
+                                        && (form.get('password').dirty
+                                        || form.get('password').touched)"
+                                  class="validation">{{ error.message }}</span>
+      </div>
+    </div>
+    <ng-container *ngIf="rights === 'ROLE_ADMIN'">
+      <div class="form-group">
+        <label for="right">Rights:</label>
+        <select formControlName="right"
+                class="form-control" id="right">
+          <option>USER</option>
+          <option>ADMIN</option>
+        </select>
+        <div *ngFor="let error of validationErrors.rights">
+                            <span *ngIf="form.get('right').hasError(error.type)
+                                        && (form.get('right').dirty
+                                        || form.get('right').touched)"
+                                  class="validation">{{ error.message }}</span>
+        </div>
+      </div>
+    </ng-container>
+
+    <button class="btn btn-info"
+            (click)="submitForm()"
+            [disabled]="form.invalid"
+    >Сохранить
+    </button>
+  </form>
+</div>

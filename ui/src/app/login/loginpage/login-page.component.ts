@@ -46,9 +46,7 @@ export class LoginPageComponent implements OnInit {
 
   onSubmit() {
     this.emp.login = this.form.get("login").value;
-    console.log(this.emp.login);
     this.emp.password = this.form.get("password").value;
-    console.log(this.emp.password);
     this.authService.login(this.emp).subscribe(
       data => {
         this.tokenStorage.saveToken(data.token);

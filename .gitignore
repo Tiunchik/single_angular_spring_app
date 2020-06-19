@@ -51,3 +51,6 @@ Thumbs.db
 ui.iml
 server.iml
 holidays.iml
+
+# all compalied angular files
+/server/src/main/resources/static/*
