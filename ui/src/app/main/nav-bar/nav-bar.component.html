@@ -8,12 +8,18 @@
               </ul>
             </div>
     <div class="collapse navbar-collapse" id="navbarSupportedContent" >
-      <ul class="nav navbar-nav ml-auto" style="cursor: pointer">
-        <li class="nav-item">
-          <a class="nav-link" [routerLink]="'/login'">Login</a>
+      <ul class="navbar-nav ml-auto nav-tabs" style="cursor: pointer">
+        <li class="nav-item" *ngIf="rights === 'ROLE_ADMIN'">
+          <a class="nav-link" [routerLink]="'/employee'">Employee list</a>
+        </li>
+        <li class="nav-item" *ngIf="rights === 'ROLE_ADMIN'">
+          <a class="nav-link" [routerLink]="'/admin'">Admin list</a>
+        </li>
+        <li class="nav-item" *ngIf="rights === 'ROLE_ADMIN'">
+          <a class="nav-link" [routerLink]="'/holiday'">Holidays list</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Page2</a>
+          <a class="nav-link" [routerLink]="'/holiday/' + id">Edit your holidays</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" (click)="logOut()" >Logout</a>

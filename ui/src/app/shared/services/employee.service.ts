@@ -1,9 +1,12 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {DBConstat} from "../constants/dbconstat";
-import {HttpClient, HttpParams} from "@angular/common/http";
+import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {Employee} from "../models/employee";
-import {Holiday} from "../models/holiday";
+
+const httpOptions = {
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+};
 
 @Injectable({
   providedIn: 'root'
@@ -16,9 +19,9 @@ export class EmployeeService {
   constructor(private http: HttpClient) {
   }
 
-  getById(id): Observable<Employee[]> {
+  getById(id): Observable<Employee> {
     const url = this.url + 'api/employee/' + id;
-    return this.http.get<Employee[]>(url);
+    return this.http.get<Employee>(url);
   }
 
   get(): Observable<Employee[]> {
@@ -27,39 +30,20 @@ export class EmployeeService {
     return this.http.get<Employee[]>(url);
   }
 
-  save(emp: Employee) {
+  save(emp: Employee): Observable<Employee> {
     const url = this.url + 'api/employee/';
     let params = new HttpParams();
-    params = params.append('name', String(emp.name));
-    params = params.append('patronim', String(emp.patronim));
-    params = params.append('surname', String(emp.surname));
-    params = params.append('born', String(emp.born.getTime()));
-    params = params.append('post', String(emp.post));
-    params = params.append('start', String(emp.start.getTime()));
-    params = params.append('login', String(emp.login));
-    params = params.append('password', String(emp.password));
-    params = params.append('rights', String(emp.rights));
-    return this.http.put(url, params);
+    return this.http.post<Employee>(url, emp);
   }
 
   update(emp: Employee) {
     const url = this.url + 'api/employee/';
     let params = new HttpParams();
-    params = params.append('id', String(emp.id));
-    params = params.append('name', String(emp.name));
-    params = params.append('patronim', String(emp.patronim));
-    params = params.append('surname', String(emp.surname));
-    params = params.append('born', String(emp.born.getTime()));
-    params = params.append('post', String(emp.post));
-    params = params.append('start', String(emp.start.getTime()));
-    params = params.append('login', String(emp.login));
-    params = params.append('password', String(emp.password));
-    params = params.append('rights', String(emp.rights));
-    return this.http.put(url, params);
+    return this.http.put(url, emp);
   }
 
-  delete(id) {
+  delete(id): Observable<void> {
     const url = this.url + 'api/holiday/' + id;
-    return this.http.delete(url);
+    return this.http.delete<void>(url);
   }
 }

@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("api/employee")
+@RequestMapping("/api")
 public class EmployeeController {
 
     private EmployeeRepository empRep;
@@ -22,12 +22,12 @@ public class EmployeeController {
         this.empRep = empRep;
     }
 
-    @GetMapping
-    public List<Employee> getAllEmployees() {
-        return empRep.findAll();
+    @GetMapping("/employee")
+    public ResponseEntity<List<Employee>> getAllEmployees() {
+        return new ResponseEntity<>(empRep.findAll(), HttpStatus.OK);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/employee/{id}")
     public ResponseEntity<Employee> getEmployee(@PathVariable Long id) {
         Optional<Employee> emp = empRep.findById(id);
         return emp
@@ -35,18 +35,27 @@ public class EmployeeController {
                 .orElse(new ResponseEntity<>(HttpStatus.BAD_REQUEST));
     }
 
-    @PutMapping
+    @PostMapping("/employee")
     public ResponseEntity<Employee> createEmployee(@RequestBody Employee emp) {
-        return null;
+        if (emp.getId() != 0) {
+            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+        }
+        Employee answer = empRep.save(emp);
+        return new ResponseEntity<>(answer, HttpStatus.OK);
     }
 
-    @PostMapping()
+    @PutMapping("/employee")
     public ResponseEntity<Employee> updateEmployee(@RequestBody Employee emp) {
-        return null;
+        if (emp.getId() == 0) {
+            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+        }
+        Employee answer = empRep.save(emp);
+        return new ResponseEntity<>(answer, HttpStatus.OK);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/employee/{id}")
     public ResponseEntity<Void> deleteEmployee(@PathVariable Long id) {
-        return null;
+        empRep.deleteById(id);
+        return ResponseEntity.noContent().build();
     }
 }

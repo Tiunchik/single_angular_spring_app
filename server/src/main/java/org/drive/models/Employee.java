@@ -21,6 +21,9 @@ public class Employee {
 
     private String post;
 
+    @Column(unique = true)
+    private int num;
+
     private Date start;
 
     @Column(unique = true)
@@ -108,6 +111,14 @@ public class Employee {
 
     public void setRights(String rights) {
         this.rights = rights;
+    }
+
+    public int getNum() {
+        return num;
+    }
+
+    public void setNum(int num) {
+        this.num = num;
     }
 
     @Override

@@ -1,0 +1,25 @@
+<div class="container-fluid">
+  <div>
+    <br>
+    <button type="button" class="btn btn-primary float-right" (click)="goToCreate()">Add holiday</button>
+    <br>
+  </div>
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th>Employee name</th>
+      <th>Employee surname</th>
+      <th>Holiday start</th>
+      <th>Holiday finish</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let hol of holidays" style="cursor: pointer" (click)="goToEdit(hol.employee.id, hol.id)" [title]="'Press to edit'">
+      <td>{{hol.employee.name}}</td>
+      <td>{{hol.employee.surname}}</td>
+      <td>{{hol.start}}</td>
+      <td>{{hol.finish}}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>

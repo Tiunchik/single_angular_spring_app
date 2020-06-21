@@ -1,0 +1,50 @@
+<div class="container">
+  <form [formGroup]="form">
+    <div class="form-group">
+      <label for="employee">Employee:</label>
+      <select
+        formControlName="employee"
+        class="form-control" id="employee" (change)="this.onChange($event.target.value)">
+        <ng-container *ngFor="let emp of employees">
+          <option value="{{emp.id}}">{{emp.name}} {{emp.surname}}</option>
+        </ng-container>
+      </select>
+      <div *ngFor="let error of validationErrors.employee">
+                            <span *ngIf="form.get('employee').hasError(error.type)
+                                        && (form.get('employee').dirty
+                                        || form.get('employee').touched)"
+                                  class="validation">{{ error.message }}</span>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="start">First day:</label>
+      <input type="date"
+             formControlName="start"
+             class="form-control" id="start" (change)="checkDates()">
+      <div *ngFor="let error of validationErrors.start">
+                            <span *ngIf="form.get('start').hasError(error.type)
+                                        && (form.get('start').dirty
+                                        || form.get('start').touched)"
+                                  class="validation">{{ error.message }}</span>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="finish">Last day:</label>
+      <input type="date"
+             formControlName="finish"
+             class="form-control" id="finish" (change)="checkDates()">
+      <div *ngFor="let error of validationErrors.finish">
+                            <span *ngIf="form.get('finish').hasError(error.type)
+                                        && (form.get('finish').dirty
+                                        || form.get('finish').touched)"
+                                  class="validation">{{ error.message }}</span>
+      </div>
+    </div>
+
+    <button class="btn btn-info"
+            (click)="submitForm()"
+            [disabled]=this.valid
+    >Сохранить
+    </button>
+  </form>
+</div>

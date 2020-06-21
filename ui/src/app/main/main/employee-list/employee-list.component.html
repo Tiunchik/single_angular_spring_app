@@ -1,17 +1,24 @@
 <div class="container-fluid">
+  <div *ngIf="adminMode">
+    <br>
+    <button type="button" class="btn btn-primary float-right" [routerLink]="'/employee/new'">Add employee</button>
+    <br>
+  </div>
   <table class="table table-striped">
     <thead>
     <tr>
+      <th>Number</th>
       <th>Name</th>
       <th>Patronymic</th>
       <th>Surname</th>
-      <th>Born</th>
-      <th>Post</th>
-      <th>Start</th>
+      <th>DOB</th>
+      <th>Position</th>
+      <th>DOS</th>
     </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let emp of employees">
+    <tr *ngFor="let emp of employees" (click)="goToEdit(emp.id)" style="cursor: pointer">
+      <td>{{emp.num}}</td>
       <td>{{emp.name}}</td>
       <td>{{emp.patronim}}</td>
       <td>{{emp.surname}}</td>

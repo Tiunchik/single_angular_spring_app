@@ -61,6 +61,18 @@
       </div>
     </div>
     <div class="form-group">
+      <label for="num">Number:</label>
+      <input type="text"
+             formControlName="num"
+             class="form-control" id="num">
+      <div *ngFor="let error of validationErrors.num">
+                            <span *ngIf="form.get('post').hasError(error.type)
+                                        && (form.get('post').dirty
+                                        || form.get('post').touched)"
+                                  class="validation">{{ error.message }}</span>
+      </div>
+    </div>
+    <div class="form-group">
       <label for="start">DOS:</label>
       <input type="date"
              formControlName="start"

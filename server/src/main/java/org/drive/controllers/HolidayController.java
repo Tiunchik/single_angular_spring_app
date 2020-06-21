@@ -1,15 +1,18 @@
 package org.drive.controllers;
 
 import org.drive.models.Employee;
+import org.drive.models.Holiday;
 import org.drive.repositories.HolidayRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
-@RequestMapping("api/holiday")
+@RequestMapping("/api")
 public class HolidayController {
 
     private HolidayRepository holRep;
@@ -19,28 +22,45 @@ public class HolidayController {
     }
 
 
-    @GetMapping
-    public List<Employee> getAllHolidays(){
-        return null;
+    @GetMapping("/holiday")
+    public ResponseEntity<List<Holiday>>  getAllHolidays(){
+        return new ResponseEntity<>(holRep.findAll(), HttpStatus.OK);
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Employee> getHoliday(@PathVariable Long id) {
-        return null;
+    @GetMapping("/holiday/{id}")
+    public ResponseEntity<Holiday> getHoliday(@PathVariable Long id) {
+        Optional<Holiday> emp = holRep.findById(id);
+        return emp
+                .map(e -> new ResponseEntity<>(e, HttpStatus.OK))
+                .orElse(new ResponseEntity<>(HttpStatus.BAD_REQUEST));
     }
 
-    @PutMapping
-    public ResponseEntity<Employee> createHoliday(@RequestBody Employee emp){
-        return null;
+    @GetMapping("/holiday/employee/{id}")
+    public ResponseEntity<List<Holiday>> getHolidayByEmployeeId(@PathVariable Long id) {
+        return new ResponseEntity<>(holRep.findByEmployee_Id(id), HttpStatus.OK);
     }
 
-    @PostMapping
-    public ResponseEntity<Employee> updateHoliday(@RequestBody Employee emp){
-        return null;
+    @PostMapping("/holiday")
+    public ResponseEntity<Holiday> createHoliday(@RequestBody Holiday hol){
+        if (hol.getId() != 0) {
+            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+        }
+        Holiday answer = holRep.save(hol);
+        return new ResponseEntity<>(answer, HttpStatus.OK);
+    }
+
+    @PutMapping("/holiday")
+    public ResponseEntity<Holiday> updateHoliday(@RequestBody Holiday hol){
+        if (hol.getId() == 0) {
+            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+        }
+        Holiday answer = holRep.save(hol);
+        return new ResponseEntity<>(answer, HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteHoliday(@PathVariable Long id) {
-        return null;
+        holRep.deleteById(id);
+        return ResponseEntity.noContent().build();
     }
 }

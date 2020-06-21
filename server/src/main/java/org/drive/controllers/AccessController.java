@@ -33,6 +33,7 @@ public class AccessController {
         answer.put("token", token);
         answer.put("user", employee.getName() + " " + employee.getSurname());
         answer.put("rights", employee.getRights());
+        answer.put("id", employee.getId());
         return new ResponseEntity<>(answer.toString(), HttpStatus.OK);
     }
 }

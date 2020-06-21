@@ -3,10 +3,10 @@ import {Employee} from "./employee";
 export class Holiday {
 
   constructor(
-    public id: number,
-    public employee: Employee,
-    public start: Date,
-    public finish: Date
+    public id?: number,
+    public employee?: Employee,
+    public start?: Date,
+    public finish?: Date
   ) {
   }
 }

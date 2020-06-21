@@ -13,10 +13,10 @@ import {Employee} from "../../shared/models/employee";
 export class LoginPageComponent implements OnInit {
   validationErrors = {
     login: [
-      { type: 'required', message: 'Введите логин'}
+      { type: 'required', message: 'Enter login'}
     ],
     password: [
-      { type: 'required', message: 'Введите пароль'}
+      { type: 'required', message: 'Enter password'}
     ]
   };
   form: FormGroup;
@@ -45,6 +45,7 @@ export class LoginPageComponent implements OnInit {
   }
 
   onSubmit() {
+    this.tokenStorage.signOut();
     this.emp.login = this.form.get("login").value;
     this.emp.password = this.form.get("password").value;
     this.authService.login(this.emp).subscribe(
@@ -52,6 +53,7 @@ export class LoginPageComponent implements OnInit {
         this.tokenStorage.saveToken(data.token);
         this.tokenStorage.saveUser(data.user);
         this.tokenStorage.saveRights(data.rights);
+        this.tokenStorage.saveID(data.id);
         this.reloadPage();
       },
       err => {

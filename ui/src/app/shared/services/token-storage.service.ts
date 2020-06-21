@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 const TOKEN_KEY = 'auth-token';
 const USER_KEY = 'auth-user';
 const RIGHTS_KEY = 'auth-rights';
+const USER_ID_KEY = 'user_id_key';
 
 @Injectable({
   providedIn: 'root'
@@ -40,5 +41,14 @@ export class TokenStorageService {
 
   public getRights() {
     return localStorage.getItem(RIGHTS_KEY);
+  }
+
+  public saveID(id: string) {
+    window.localStorage.removeItem(USER_ID_KEY);
+    window.localStorage.setItem(USER_ID_KEY, id);
+  }
+
+  public getID() {
+    return localStorage.getItem(USER_ID_KEY);
   }
 }

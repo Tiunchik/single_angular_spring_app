@@ -5,6 +5,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {TokenStorageService} from "../../../shared/services/token-storage.service";
 import {EmployeeService} from "../../../shared/services/employee.service";
 import {switchMap} from "rxjs/operators";
+import {of} from "rxjs";
 
 @Component({
   selector: 'app-edit-employee',
@@ -14,7 +15,8 @@ import {switchMap} from "rxjs/operators";
 export class EditEmployeeComponent implements OnInit {
 
   constructor(private fb: FormBuilder,
-              private router: ActivatedRoute,
+              private route: ActivatedRoute,
+              private router: Router,
               private token: TokenStorageService,
               private employeeService: EmployeeService) {
   }
@@ -33,7 +35,10 @@ export class EditEmployeeComponent implements OnInit {
       {type: 'required', message: 'Enter day of birthday'}
     ],
     post: [
-      {type: 'required', message: 'Enter your current position'}
+      {type: 'required', message: 'Enter current position'}
+    ],
+    num: [
+      {type: 'required', message: 'Enter employee number'}
     ],
     start: [
       {type: 'required', message: 'Enter first day of work'}
@@ -50,21 +55,27 @@ export class EditEmployeeComponent implements OnInit {
   };
 
   form: FormGroup;
-  employee: Employee;
+  employee: Employee = {};
   rights: string = this.token.getRights();
   id: string;
+  update: boolean = false;
 
   ngOnInit(): void {
     this.initNewForm();
+    this.createOrUpdate();
   }
 
-  // private findID() {
-  //   this.router.params.subscribe(params => {
-  //     if (params.id &&)
-  //   })
-  //     })
-  //   )
-  // }
+  private createOrUpdate() {
+    const id = this.route.snapshot.params.id;
+    if (id && id !== 'new') {
+      this.employeeService.getById(id).subscribe(data => {
+        this.employee = data;
+        this.fillInForm();
+        this.update = true;
+      });
+    }
+  }
+
 
   private initNewForm() {
     if (this.rights === 'ROLE_ADMIN') {
@@ -75,6 +86,7 @@ export class EditEmployeeComponent implements OnInit {
         surname: ['', Validators.required],
         born: ['', Validators.required],
         post: ['', Validators.required],
+        num: ['', Validators.required],
         start: ['', Validators.required],
         login: ['', Validators.required],
         password: ['', Validators.required],
@@ -88,11 +100,30 @@ export class EditEmployeeComponent implements OnInit {
         surname: ['', Validators.required],
         born: ['', Validators.required],
         post: ['', Validators.required],
+        num: ['', Validators.required],
         start: ['', Validators.required],
         login: ['', Validators.required],
         password: ['', Validators.required],
         right: ['']
       });
+    }
+  }
+
+  private fillInForm() {
+    this.form.get('id').setValue(this.employee.id);
+    this.form.get('name').setValue(this.employee.name);
+    this.form.get('patronim').setValue(this.employee.patronim);
+    this.form.get('surname').setValue(this.employee.surname);
+    this.form.get('born').setValue(this.employee.born);
+    this.form.get('post').setValue(this.employee.post);
+    this.form.get('num').setValue(this.employee.num);
+    this.form.get('start').setValue(this.employee.start);
+    this.form.get('login').setValue(this.employee.login);
+    this.form.get('password').setValue(this.employee.password);
+    if (this.employee.rights === 'ROLE_USER') {
+      this.form.get('right').setValue('USER');
+    } else {
+      this.form.get('right').setValue('ADMIN');
     }
   }
 
@@ -102,6 +133,7 @@ export class EditEmployeeComponent implements OnInit {
     this.employee.surname = this.form.get('surname').value;
     this.employee.born = this.form.get('born').value;
     this.employee.post = this.form.get('post').value;
+    this.employee.num = this.form.get('num').value;
     this.employee.start = this.form.get('start').value;
     this.employee.login = this.form.get('login').value;
     this.employee.password = this.form.get('password').value;
@@ -110,7 +142,14 @@ export class EditEmployeeComponent implements OnInit {
     } else {
       this.employee.rights = 'ROLE_USER';
     }
-    this.employeeService.update(this.employee);
+    if (this.update) {
+      console.log(this.update);
+      this.employeeService.update(this.employee)
+        .subscribe(() => this.router.navigate(['/admin']));
+    } else {
+      this.employeeService.save(this.employee)
+        .subscribe(() => this.router.navigate(['/employee']));
+    }
   }
 
 }

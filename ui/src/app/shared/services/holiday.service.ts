@@ -16,10 +16,16 @@ export class HolidayService {
   constructor(private http: HttpClient) {
   }
 
-  getById(id): Observable<Holiday[]> {
+  getById(id): Observable<Holiday> {
     const url = this.url + 'api/holiday/' + id;
+    return this.http.get <Holiday>(url);
+  }
+
+  getByEmployeeId(id): Observable<Holiday[]> {
+    const url = this.url + 'api/holiday/employee/' + id;
     return this.http.get<Holiday[]>(url);
   }
+
 
   get(): Observable<Holiday[]> {
     const url = this.url + 'api/holiday/';
@@ -29,21 +35,12 @@ export class HolidayService {
 
   save(holi: Holiday) {
     const url = this.url + 'api/holiday/';
-    let params = new HttpParams();
-    params = params.append('employee', String(holi.employee.id));
-    params = params.append('start', String(holi.start.getTime()));
-    params = params.append('finish', String(holi.finish.getTime()));
-    return this.http.put(url, params);
+    return this.http.post(url, holi);
   }
 
   update(holi: Holiday) {
-    const url = this.url + 'api/holiday/' + holi.id;
-    let params = new HttpParams();
-    params = params.append('id', String(holi.id));
-    params = params.append('employee', String(holi.employee.id));
-    params = params.append('start', String(holi.start.getTime()));
-    params = params.append('finish', String(holi.finish.getTime()));
-    return this.http.put(url, params);
+    const url = this.url + 'api/holiday/';
+    return this.http.put(url, holi);
   }
 
   delete(id) {

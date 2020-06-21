@@ -13,9 +13,14 @@ export class NavBarComponent implements OnInit {
               private router: Router) {
   }
 
-  user: string = this.tokenStorage.getUser();
+  user: string;
+  rights: string;
+  id: string;
 
   ngOnInit(): void {
+    this.user = this.tokenStorage.getUser();
+    this.rights = this.tokenStorage.getRights();
+    this.id = this.tokenStorage.getID();
   }
 
   logOut() {
