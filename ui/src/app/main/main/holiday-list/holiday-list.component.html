@@ -6,15 +6,25 @@
   </div>
   <table class="table table-striped">
     <thead>
-    <tr>
-      <th>Employee name</th>
-      <th>Employee surname</th>
-      <th>Holiday start</th>
-      <th>Holiday finish</th>
+    <tr style="cursor: pointer">
+      <th (click)="sortByNum()">{{showed.Number}}</th>
+      <th (click)="sortByName()">{{showed.Name}}</th>
+      <th (click)="sortBySurname()">{{showed.Surname}}</th>
+      <th (click)="sortByDOS()">{{showed.DOS}}</th>
+      <th (click)="sortByDOF()">{{showed.DOF}}</th>
+    </tr>
+    <tr style="cursor: pointer" (change)="doFilter()">
+      <th><input type="text" [(ngModel)]="filter.Number"></th>
+      <th><input type="text" [(ngModel)]="filter.Name"></th>
+      <th><input type="text" [(ngModel)]="filter.Surname"></th>
+      <th><input type="date" [(ngModel)]="filter.DOS" title="Show all dates after chosen"></th>
+      <th><input type="date" [(ngModel)]="filter.DOF" title="Show all dates before chosen"></th>
     </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let hol of holidays" style="cursor: pointer" (click)="goToEdit(hol.employee.id, hol.id)" [title]="'Press to edit'">
+    <tr *ngFor="let hol of sortedHoliday" style="cursor: pointer" (click)="goToEdit(hol.employee.id, hol.id)"
+        [title]="'Press to edit'">
+      <td>{{hol.employee.num}}</td>
       <td>{{hol.employee.name}}</td>
       <td>{{hol.employee.surname}}</td>
       <td>{{hol.start}}</td>

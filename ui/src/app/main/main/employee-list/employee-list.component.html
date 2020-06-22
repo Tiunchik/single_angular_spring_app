@@ -6,18 +6,18 @@
   </div>
   <table class="table table-striped">
     <thead>
-    <tr>
-      <th>Number</th>
-      <th>Name</th>
-      <th>Patronymic</th>
-      <th>Surname</th>
-      <th>DOB</th>
-      <th>Position</th>
-      <th>DOS</th>
+    <tr style="cursor: pointer">
+      <th (click)="sortByNum()">{{showed.Number}}</th>
+      <th (click)="sortByName()">{{showed.Name}}</th>
+      <th (click)="sortByPatronim()">{{showed.Patronim}}</th>
+      <th (click)="sortBySurname()">{{showed.Surname}}</th>
+      <th (click)="sortByDOB()">{{showed.DOB}}</th>
+      <th (click)="sortByPosition()">{{showed.Position}}</th>
+      <th (click)="sortByDOS()">{{showed.DOS}}</th>
     </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let emp of employees" (click)="goToEdit(emp.id)" style="cursor: pointer">
+    <tr *ngFor="let emp of sortedEmployee" (click)="goToEdit(emp.id)" style="cursor: pointer">
       <td>{{emp.num}}</td>
       <td>{{emp.name}}</td>
       <td>{{emp.patronim}}</td>
