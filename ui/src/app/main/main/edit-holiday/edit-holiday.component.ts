@@ -38,6 +38,7 @@ export class EditHolidayComponent implements OnInit {
   employees: Employee[] = [];
   employee: Employee;
   holiday: Holiday = {};
+  checkHoliday: Holiday[] = [];
   id;
   holid;
   update: boolean = false;
@@ -106,20 +107,53 @@ export class EditHolidayComponent implements OnInit {
     }
   }
 
+  checkStartAndFinish(): boolean {
+    this.holidayService.getByEmployeeId(this.employee.id)
+      .subscribe(data => {
+        this.checkHoliday = data;
+      }, () => {
+      }, () => {
+        let str = String(this.holiday.start);
+        console.log(str);
+        let startdate: Date = new Date(Number(str.slice(0, 4)),
+          Number(str.slice(5, 7)),
+          Number(str.slice(8, 9)));
+        str = String(this.holiday.finish);
+        console.log(str);
+        let fintdate: Date = new Date(Number(str.slice(0, 4)),
+          Number(str.slice(5, 7)),
+          Number(str.slice(8, 9)));
+        this.checkHoliday.filter((x: Holiday) => {
+          str = String(x.start);
+          let checkStartDate: Date = new Date(Number(str.slice(0, 4)),
+            Number(str.slice(5, 7)),
+            Number(str.slice(8, 9)));
+          str = String(x.finish);
+          let checkFinishDate: Date = new Date(Number(str.slice(0, 4)),
+            Number(str.slice(5, 7)),
+            Number(str.slice(8, 9)));
+          return fintdate < checkStartDate || startdate > checkFinishDate;
+        });
+      });
+    return this.checkHoliday.length == 0;
+  }
+
   submitForm() {
     this.holiday.employee = this.employee;
     this.holiday.start = this.form.get('start').value;
     this.holiday.finish = this.form.get('finish').value;
-    if (this.id == ' new' || this.holid == 'new') {
-      this.holidayService.save(this.holiday)
-        .subscribe(() => {
-          this.router.navigate(['/holiday', this.employee.id])
-        });
-    } else {
-      this.holidayService.update(this.holiday)
-        .subscribe(() => {
-          this.router.navigate(['/holiday', this.employee.id])
-        });
+    if (this.checkStartAndFinish()) {
+      if (this.id == ' new' || this.holid == 'new') {
+        this.holidayService.save(this.holiday)
+          .subscribe(() => {
+            this.router.navigate(['/holiday', this.employee.id])
+          });
+      } else {
+        this.holidayService.update(this.holiday)
+          .subscribe(() => {
+            this.router.navigate(['/holiday', this.employee.id])
+          });
+      }
     }
   }
 }
