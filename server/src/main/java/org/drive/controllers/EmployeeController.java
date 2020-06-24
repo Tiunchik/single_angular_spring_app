@@ -1,9 +1,7 @@
 package org.drive.controllers;
 
-import org.apache.tomcat.util.http.ResponseUtil;
 import org.drive.models.Employee;
 import org.drive.repositories.EmployeeRepository;
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,9 +14,9 @@ import java.util.Optional;
 @RequestMapping("/api")
 public class EmployeeController {
 
-    private EmployeeRepository empRep;
+    private final EmployeeRepository empRep;
 
-    public EmployeeController(EmployeeRepository empRep) {
+    public EmployeeController(@Autowired EmployeeRepository empRep) {
         this.empRep = empRep;
     }
 

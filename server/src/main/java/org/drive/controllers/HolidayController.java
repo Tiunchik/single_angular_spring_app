@@ -1,6 +1,5 @@
 package org.drive.controllers;
 
-import org.drive.models.Employee;
 import org.drive.models.Holiday;
 import org.drive.repositories.HolidayRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,9 +14,9 @@ import java.util.Optional;
 @RequestMapping("/api")
 public class HolidayController {
 
-    private HolidayRepository holRep;
+    private final HolidayRepository holRep;
 
-    public HolidayController(HolidayRepository holRep) {
+    public HolidayController(@Autowired HolidayRepository holRep) {
         this.holRep = holRep;
     }
 

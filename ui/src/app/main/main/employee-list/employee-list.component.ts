@@ -1,8 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {EmployeeService} from "../../../shared/services/employee.service";
 import {Employee} from "../../../shared/models/employee";
-import {ActivatedRoute, Router} from "@angular/router";
-import {newArray} from "@angular/compiler/src/util";
+import {Router} from "@angular/router";
+import {ExcelService} from "../../../shared/services/excel.service";
+import {saveAs} from "file-saver";
 
 @Component({
   selector: 'app-employee-list',
@@ -12,6 +13,7 @@ import {newArray} from "@angular/compiler/src/util";
 export class EmployeeListComponent implements OnInit {
 
   constructor(private employeeService: EmployeeService,
+              private excelService: ExcelService,
               private router: Router) {
   }
 
@@ -50,6 +52,13 @@ export class EmployeeListComponent implements OnInit {
     if (this.router.url === '/admin') {
       this.adminMode = true;
     }
+  }
+
+  loadExcel() {
+    this.excelService.download().subscribe(
+      (response: any) => {
+        saveAs(response, 'holiday.xlxs');
+      });
   }
 
   goToEdit(id) {

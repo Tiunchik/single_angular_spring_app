@@ -4,6 +4,11 @@
     <button type="button" class="btn btn-primary float-right" [routerLink]="'/employee/new'">Add employee</button>
     <br>
   </div>
+  <div *ngIf="!adminMode">
+    <br>
+    <button type="button" class="btn btn-primary float-right"  (click)="loadExcel()">Download excel report</button>
+    <br>
+  </div>
   <table class="table table-striped">
     <thead>
     <tr style="cursor: pointer">

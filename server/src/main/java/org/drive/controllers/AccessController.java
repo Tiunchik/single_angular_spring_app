@@ -1,6 +1,5 @@
 package org.drive.controllers;
 
-import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.drive.models.Employee;
 import org.drive.repositories.EmployeeRepository;
 import org.drive.security.JwtProvider;
@@ -11,18 +10,20 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.Map;
 
 @Controller
 public class AccessController {
 
-    @Autowired
-    private EmployeeRepository empRep;
+    private final EmployeeRepository empRep;
 
-    @Autowired
-    private JwtProvider jwtProvider;
+    private final JwtProvider jwtProvider;
+
+    public AccessController(@Autowired EmployeeRepository empRep, @Autowired JwtProvider jwtProvider) {
+        this.empRep = empRep;
+        this.jwtProvider = jwtProvider;
+    }
 
     @PostMapping(value = "/login")
     public ResponseEntity<String> login(@RequestBody Map<String, String> map) {
