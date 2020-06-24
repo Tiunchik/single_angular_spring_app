@@ -1,5 +1,6 @@
 <div class="container">
   <form [formGroup]="form">
+
     <div class="form-group">
       <label for="employee">Employee:</label>
       <select
@@ -40,7 +41,10 @@
                                   class="validation">{{ error.message }}</span>
       </div>
     </div>
-
+    <div class="form-group" *ngIf="checkFullList">
+                                  <span
+                                    class="validation">You have been already had holiday during this period</span>
+    </div>
     <button class="btn btn-info"
             (click)="submitForm()"
             [disabled]=this.valid

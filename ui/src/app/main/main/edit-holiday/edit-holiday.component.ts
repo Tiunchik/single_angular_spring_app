@@ -43,6 +43,7 @@ export class EditHolidayComponent implements OnInit {
   holid;
   update: boolean = false;
   valid: boolean = true;
+  checkFullList = false;
 
   ngOnInit(): void {
     this.preparePage();
@@ -72,6 +73,7 @@ export class EditHolidayComponent implements OnInit {
         .subscribe(data => {
           this.employees = [data];
           this.employee = data;
+          this.loadHolidayList();
         });
     }
   }
@@ -90,6 +92,7 @@ export class EditHolidayComponent implements OnInit {
 
   onChange(id) {
     this.employee = this.employees.filter(x => x.id == id).shift();
+    this.loadHolidayList();
   }
 
   checkID(): boolean {
@@ -107,35 +110,28 @@ export class EditHolidayComponent implements OnInit {
     }
   }
 
-  checkStartAndFinish(): boolean {
+  loadHolidayList() {
     this.holidayService.getByEmployeeId(this.employee.id)
       .subscribe(data => {
         this.checkHoliday = data;
-      }, () => {
-      }, () => {
-        let str = String(this.holiday.start);
-        console.log(str);
-        let startdate: Date = new Date(Number(str.slice(0, 4)),
-          Number(str.slice(5, 7)),
-          Number(str.slice(8, 9)));
-        str = String(this.holiday.finish);
-        console.log(str);
-        let fintdate: Date = new Date(Number(str.slice(0, 4)),
-          Number(str.slice(5, 7)),
-          Number(str.slice(8, 9)));
-        this.checkHoliday.filter((x: Holiday) => {
-          str = String(x.start);
-          let checkStartDate: Date = new Date(Number(str.slice(0, 4)),
-            Number(str.slice(5, 7)),
-            Number(str.slice(8, 9)));
-          str = String(x.finish);
-          let checkFinishDate: Date = new Date(Number(str.slice(0, 4)),
-            Number(str.slice(5, 7)),
-            Number(str.slice(8, 9)));
-          return fintdate < checkStartDate || startdate > checkFinishDate;
-        });
       });
-    return this.checkHoliday.length == 0;
+  }
+
+  checkStartAndFinish(): boolean {
+    let check: boolean = true;
+    let startdate: Date = new Date(String(this.holiday.start));
+    let fintdate: Date = new Date(String(this.holiday.finish));
+    this.checkHoliday.forEach((x: Holiday) => {
+      let checkStartDate: Date = new Date(String(x.start));
+      let checkFinishDate: Date = new Date(String(x.finish));
+      if (startdate > checkStartDate && startdate < checkFinishDate) {
+        check = false;
+      }
+      if (fintdate > checkStartDate && fintdate < checkFinishDate) {
+        check = false;
+      }
+    });
+    return check;
   }
 
   submitForm() {
@@ -154,6 +150,8 @@ export class EditHolidayComponent implements OnInit {
             this.router.navigate(['/holiday', this.employee.id])
           });
       }
+    } else {
+      this.checkFullList = true;
     }
   }
 }
