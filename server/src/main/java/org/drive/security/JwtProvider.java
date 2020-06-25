@@ -1,8 +1,8 @@
 package org.drive.security;
 
 import io.jsonwebtoken.*;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -13,7 +13,7 @@ import java.util.Date;
 @Component
 public class JwtProvider {
 
-    private final Logger log = LoggerFactory.getLogger(org.drive.security.JwtProvider.class);
+    private final Logger log = LogManager.getLogger(org.drive.security.JwtProvider.class);
 
     @Value("${codeValue}")
     private String codeValue;
