@@ -41,7 +41,7 @@
 в списке отпусков
 * День 10 - затрачено 3 часа: 2 часа на добавление liquibase, добавлены скрипты на первичное формирование таблиц в базе данных, 1 час на дооформление README.md и инструкцию с требованиями к БД.
 Итого: 33,5 часов
-2. исполняемый файл .jar - Spring Boot (Выполнено) [Link](/uri "https://drive.google.com/file/d/1PkTjmMTAszhgbYLsnQv2m09KHuwX54pY/view?usp=sharing")
-3. скрипты создания базы данных и наполнения тестовыми данными (Выполнено) [Link](/uri "https://github.com/Tiunchik/single_angular_spring_app/tree/master/server/src/main/resources/db/scripts")
-4. инструкцию по развертыванию (создание БД, настройка соединения с БД) (Частично) [Link](/uri "https://github.com/Tiunchik/single_angular_spring_app/blob/master/DataBaseInstruction.TXT")
-5. исходный код в виде Maven-проекта , ссылка на [GIT](/uri "https://github.com/Tiunchik/single_angular_spring_app") (Выполнено)
+2. исполняемый файл .jar - Spring Boot (Выполнено) [Link](https://drive.google.com/file/d/1PkTjmMTAszhgbYLsnQv2m09KHuwX54pY/view?usp=sharing)
+3. скрипты создания базы данных и наполнения тестовыми данными (Выполнено) [Link](https://github.com/Tiunchik/single_angular_spring_app/tree/master/server/src/main/resources/db/scripts)
+4. инструкцию по развертыванию (создание БД, настройка соединения с БД) (Частично) [Link](https://github.com/Tiunchik/single_angular_spring_app/blob/master/DataBaseInstruction.TXT)
+5. исходный код в виде Maven-проекта , ссылка на [GIT](https://github.com/Tiunchik/single_angular_spring_app) (Выполнено)
