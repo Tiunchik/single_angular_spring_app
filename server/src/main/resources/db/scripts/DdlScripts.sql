@@ -1,3 +1,7 @@
+drop table if exists  holiday;
+
+drop table if exists  employee;
+
 create table if not exists employee
 (id int8 not null,
 born date,
