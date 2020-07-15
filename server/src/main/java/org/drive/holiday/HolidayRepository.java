@@ -1,6 +1,6 @@
-package org.drive.repositories;
+package org.drive.holiday;
 
-import org.drive.models.Holiday;
+import org.drive.holiday.Holiday;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

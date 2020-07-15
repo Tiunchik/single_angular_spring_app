@@ -1,6 +1,6 @@
-package org.drive.security;
+package org.drive.config.security;
 
-import org.drive.models.Employee;
+import org.drive.employee.Employee;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;

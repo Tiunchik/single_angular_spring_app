@@ -1,4 +1,4 @@
-package org.drive.controllers;
+package org.drive.config.view;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

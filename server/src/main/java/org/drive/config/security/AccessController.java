@@ -1,8 +1,7 @@
-package org.drive.controllers;
+package org.drive.config.security;
 
-import org.drive.models.Employee;
-import org.drive.repositories.EmployeeRepository;
-import org.drive.security.JwtProvider;
+import org.drive.employee.Employee;
+import org.drive.employee.EmployeeRepository;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

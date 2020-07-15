@@ -1,7 +1,7 @@
-package org.drive.security;
+package org.drive.config.security;
 
-import org.drive.models.Employee;
-import org.drive.repositories.EmployeeRepository;
+import org.drive.employee.Employee;
+import org.drive.employee.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

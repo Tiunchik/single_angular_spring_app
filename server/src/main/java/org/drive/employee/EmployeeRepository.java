@@ -1,6 +1,6 @@
-package org.drive.repositories;
+package org.drive.employee;
 
-import org.drive.models.Employee;
+import org.drive.employee.Employee;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

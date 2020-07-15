@@ -1,4 +1,4 @@
-package org.drive.security;
+package org.drive.config.security;
 
 import io.jsonwebtoken.*;
 import org.apache.logging.log4j.LogManager;
@@ -13,7 +13,7 @@ import java.util.Date;
 @Component
 public class JwtProvider {
 
-    private final Logger log = LogManager.getLogger(org.drive.security.JwtProvider.class);
+    private final Logger log = LogManager.getLogger(JwtProvider.class);
 
     @Value("${codeValue}")
     private String codeValue;

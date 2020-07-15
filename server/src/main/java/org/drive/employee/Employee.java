@@ -1,4 +1,4 @@
-package org.drive.models;
+package org.drive.employee;
 
 import javax.persistence.*;
 import java.sql.Date;
