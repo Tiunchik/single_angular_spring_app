@@ -45,3 +45,8 @@
 3. скрипты создания базы данных и наполнения тестовыми данными (Выполнено) [Link](https://github.com/Tiunchik/single_angular_spring_app/tree/master/server/src/main/resources/db/scripts)
 4. инструкцию по развертыванию (создание БД, настройка соединения с БД) (Частично) [Link](https://github.com/Tiunchik/single_angular_spring_app/blob/master/DataBaseInstruction.TXT)
 5. исходный код в виде Maven-проекта , ссылка на [GIT](https://github.com/Tiunchik/single_angular_spring_app) (Выполнено)
+
+#### Дополнительно доработано/реализовано:
+* добавлен слой сервисом, маппер и ДТО - 2 часа;
+* добавлен свой ssl сертификат, добавлена поддержка ssl, добавлена переадресация с порта 8080 на https с портом 9999 - 3 часа;
+* возвращён cors фильтер, доступ с localhost:4200 заблокирован - 0,2 часа;

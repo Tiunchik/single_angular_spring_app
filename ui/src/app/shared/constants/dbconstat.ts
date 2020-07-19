@@ -1,7 +1,7 @@
 export class DBConstat {
 
   public static get dbURL(): string {
-    return 'http://localhost:9999/';
+    return 'https://localhost:9999/';
   }
 
 }
