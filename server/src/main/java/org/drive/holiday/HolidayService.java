@@ -2,6 +2,7 @@ package org.drive.holiday;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -9,6 +10,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
+@Scope("singleton")
 public class HolidayService {
 
     private final HolidayRepository holRep;

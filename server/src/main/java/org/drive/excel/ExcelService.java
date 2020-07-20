@@ -5,6 +5,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.drive.holiday.Holiday;
 import org.drive.holiday.HolidayRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
 import java.io.ByteArrayInputStream;
@@ -14,6 +15,7 @@ import java.time.Period;
 import java.util.List;
 
 @Service
+@Scope("singleton")
 public class ExcelService {
 
     private final static String[] HEADERs = {"NUMBER", "NAME", "PATRONIMYC",
